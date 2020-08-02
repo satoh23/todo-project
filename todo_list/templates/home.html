@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}
+  ToDoリスト👨‍💻
+{% endblock %}
+
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+                <button class="close" data-dismiss="alert">
+                    <small><sup>X</sup></small>
+                </button>
+                {{ message }}
+            </div>
+        {% endfor 1%}
+    {% endif %}
+
+    {% if all_items %}
+    <table class="table table-bordered">
+        <tr class="table-primary">
+            <th>やること</th>
+            <th><center>状態</center></th>
+            <th><center>削除</center></th>
+        </tr>
+        {% for todo in all_items %}
+            {% if todo.completed %}
+                <tr class="table-secondary">
+                    <td class="striker"><a href="{% url 'edit' todo.id %}">{{ todo.item }}</a></td>
+                    <td><center><a href="{% url 'uncomplete' todo.id %}"><div class="bg-warning rounded">完了🙆‍♂️</div></a></center></td>
+                    <td><center><a href="{% url 'delete' todo.id %}"><div class="bg-warning rounded">X</div></a></center></td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td><a href="{% url 'edit' todo.id %}">{{ todo.item }}</td></td>
+                    <td><center><a href="{% url 'complete' todo.id %}"><div class="bg-light rounded">まだ🙅‍♂️</div></a></center></td>
+                    <td><center><a href="{% url 'delete' todo.id %}"><div class="bg-light rounded">X</div></a></center></td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="{{ item }}" data-show-count="false">Tweet</a>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    {% endif %}
+{% endblock %}
