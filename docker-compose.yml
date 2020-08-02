@@ -18,7 +18,7 @@ services:
         environment: 
             MYSQL_DATABASE: django_docker
             MYSQL_USER: root
-            MYSQL_PASSWORD: Tetsuya2525.
+            MYSQL_PASSWORD: *******
             MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
         volumes: 
             - ./mysql:/var/lib/mysql
